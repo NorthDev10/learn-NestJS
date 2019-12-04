@@ -1,0 +1,31 @@
+version: "3.1"
+services:     
+  # The Database
+  database:
+    image: mysql:5.7
+    container_name: testnest-db
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=testnest
+      - MYSQL_USER=User
+      - MYSQL_PASSWORD=secret
+    ports:
+        - "33062:3306"
+        
+  # The phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin-testnest
+    ports:
+      - 8182:80
+    environment:
+      - MYSQL_USERNAME=root
+      - MYSQL_ROOT_PASSWORD=secret
+      - PMA_HOST=database
+    links:
+      - database:mysql
+      
+volumes:
+  dbdata:
