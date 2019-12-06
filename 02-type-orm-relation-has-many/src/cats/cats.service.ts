@@ -1,19 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Cats } from '../database/entities/cats.entity';
-//import { Users } from '../database/entities/user.entity';
+import { Cat } from '../database/entities/cat.entity';
 import { CreateCatDto } from './dto/create-cat.dto';
 
 @Injectable()
 export class CatsService {
   constructor(
-    @InjectRepository(Cats)
-    private readonly catsRepository: Repository<Cats>,
+    @InjectRepository(Cat)
+    private readonly catsRepository: Repository<Cat>,
   ) { }
 
-  async create(createCatDto: CreateCatDto): Promise<Cats> {
-    const cat = new Cats();
+  async create(createCatDto: CreateCatDto): Promise<Cat> {
+    const cat = new Cat();
     cat.name = createCatDto.name;
     cat.breed = createCatDto.breed;
     cat.age = createCatDto.age;
@@ -21,11 +20,11 @@ export class CatsService {
     return await cat.save();
   }
 
-  async findAll(): Promise<Cats[]> {
-    return await this.catsRepository.find();
+  async findAll(): Promise<Cat[]> {
+    return await this.catsRepository.find({ relations: ['user', 'photos'] });
   }
 
-  async findOne(id: number): Promise<Cats> {
-    return await this.catsRepository.findOne();
+  async findOne(id: number): Promise<Cat> {
+    return await this.catsRepository.findOne(id, { relations: ['user', 'photos'] });
   }
 }

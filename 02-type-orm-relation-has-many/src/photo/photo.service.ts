@@ -23,6 +23,6 @@ export class PhotoService {
   }
 
   async findAll(): Promise<Photo[]> {
-    return await this.photoRepository.find();
+    return await this.photoRepository.find({ relations: ['cat'] });
   }
 }

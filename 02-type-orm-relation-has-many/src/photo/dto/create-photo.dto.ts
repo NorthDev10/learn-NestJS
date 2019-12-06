@@ -1,6 +1,9 @@
 import { MinLength, MaxLength, IsInt, Min, Max, IsBoolean } from "class-validator";
 
 export class CreatePhotoDto {
+  @IsInt()
+  readonly catId: number;
+
   @MinLength(2, {
     message: "Name is too short"
   })

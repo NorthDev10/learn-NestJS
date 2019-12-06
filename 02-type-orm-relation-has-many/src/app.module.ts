@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Users } from './database/entities/users.entity';
+import { User } from './database/entities/user.entity';
 import { Photo } from './database/entities/photo.entity';
-import { Cats } from './database/entities/cats.entity';
+import { Cat } from './database/entities/cat.entity';
 
 import { PhotoModule } from './photo/photo.module';
 import { UserModule } from './users/users.module';
@@ -18,8 +18,9 @@ import { CatModule } from './cats/cats.module';
       username: 'root',
       password: 'secret',
       database: 'testnest',
-      entities: [Users, Photo, Cats],
+      entities: [User, Photo, Cat],
       synchronize: true,
+      logging: true,
     }),
     PhotoModule,
     UserModule,

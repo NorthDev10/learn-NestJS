@@ -1,9 +1,15 @@
-import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, BaseEntity } from 'typeorm';
+import { Cat } from './cat.entity';
 
-@Entity()
+import { ENTITIES } from '../../constants';
+
+@Entity(ENTITIES.PHOTOS)
 export class Photo extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @ManyToOne(type => Cat, cat => cat.user)
+  cat: Cat;
 
   @Column({ length: 500 })
   name: string;

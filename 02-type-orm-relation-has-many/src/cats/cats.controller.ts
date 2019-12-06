@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
-import { Cats } from '../database/entities/cats.entity';
+import { Cat } from '../database/entities/cat.entity';
 
 @Controller('cats')
 export class CatsController {
@@ -15,12 +15,12 @@ export class CatsController {
   }
 
   @Get()
-  async findAll(): Promise<Cats[]> {
+  async findAll(): Promise<Cat[]> {
     return await this.catsService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number): Promise<Cats> {
+  async findOne(@Param('id') id: number): Promise<Cat> {
     return await this.catsService.findOne(id);
   }
 }

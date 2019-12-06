@@ -1,8 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany, BaseEntity } from 'typeorm';
-import { Cats } from './cats.entity';
+import { Cat } from './cat.entity';
+import { ENTITIES } from '../../constants';
 
-@Entity()
-export class Users extends BaseEntity {
+@Entity(ENTITIES.USERS)
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -12,6 +13,6 @@ export class Users extends BaseEntity {
   @Column()
   age: number;
 
-  @OneToMany(type => Cats, cat => cat.userId)
-  cats: Cats[];
+  @OneToMany(type => Cat, cat => cat.user)
+  cats: Cat[];
 }

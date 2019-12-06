@@ -1,6 +1,9 @@
 import {MinLength, MaxLength, IsInt, Min, Max } from "class-validator";
 
 export class CreateCatDto {
+  @IsInt()
+  readonly userId: number;
+  
   @MinLength(2, {
     message: "Name is too short"
   })
