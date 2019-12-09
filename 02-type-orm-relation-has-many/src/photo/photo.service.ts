@@ -12,13 +12,7 @@ export class PhotoService {
   ) {}
 
   async create(createPhotoDto: CreatePhotoDto): Promise<Photo> {
-    const photo = new Photo();
-    photo.name = createPhotoDto.name;
-    photo.description = createPhotoDto.description;
-    photo.filename = createPhotoDto.filename;
-    photo.views = createPhotoDto.views;
-    photo.isPublished = createPhotoDto.isPublished;
-
+    const photo = new Photo(createPhotoDto);
     return await photo.save();
   }
 

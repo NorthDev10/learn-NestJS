@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { User } from '../database/entities/user.entity';
@@ -6,13 +6,6 @@ import { User } from '../database/entities/user.entity';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
-  @Post()
-  async create(@Body() CreateUserDto: CreateUserDto) {
-    console.log('CreateUserDto', CreateUserDto);
-    
-    await this.usersService.create(CreateUserDto);
-  }
 
   @Get()
   async findAll(): Promise<User[]> {
@@ -22,5 +15,20 @@ export class UsersController {
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<User> {
     return await this.usersService.findOne(id);
+  }
+
+  @Post()
+  async create(@Body() CreateUserDto: CreateUserDto) {
+    await this.usersService.create(CreateUserDto);
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: number, @Body() updateUserDto: CreateUserDto) {
+    await this.usersService.update(id, updateUserDto);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: number) {
+    await this.usersService.delete(id);
   }
 }
