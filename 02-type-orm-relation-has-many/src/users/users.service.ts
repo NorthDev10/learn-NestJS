@@ -33,10 +33,10 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[]> {
-    return await this.usersRepository.find({ relations: ['cats', 'cats.photos'] });
+    return await this.usersRepository.find({ where: { active: true }, relations: ['cats', 'cats.photos'] });
   }
 
   async findOne(id: number): Promise<User> {
-    return await this.usersRepository.findOne(id, { relations: ['cats', 'cats.photos'] });
+    return await this.usersRepository.findOne(id, { where: { active: true }, relations: ['cats', 'cats.photos'] });
   }
 }
