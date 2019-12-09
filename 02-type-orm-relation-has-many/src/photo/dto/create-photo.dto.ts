@@ -1,9 +1,12 @@
 import { MinLength, MaxLength, IsInt, Min, Max, IsBoolean } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePhotoDto {
+  @ApiProperty()
   @IsInt()
   readonly catId: number;
 
+  @ApiProperty()
   @MinLength(2, {
     message: "Name is too short"
   })
@@ -12,6 +15,7 @@ export class CreatePhotoDto {
   })
   readonly name: string;
 
+  @ApiProperty()
   @MinLength(10, {
     message: "Description is too short"
   })
@@ -20,6 +24,7 @@ export class CreatePhotoDto {
   })
   readonly description: string;
 
+  @ApiProperty()
   @MinLength(2, {
     message: "Filename is too short"
   })
@@ -28,11 +33,13 @@ export class CreatePhotoDto {
   })
   filename: string;
 
+  @ApiProperty()
   @IsInt()
   @Min(0)
   @Max(30)
   views: number;
 
+  @ApiProperty()
   @IsBoolean()
   isPublished: boolean;
 }

@@ -1,7 +1,10 @@
 import {MinLength, MaxLength, IsInt, Min, Max } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+
 import { Cat } from '../../database/entities/cat.entity';
 
 export class CreateUserDto {
+  @ApiProperty()
   @MinLength(2, {
     message: "Name is too short"
   })
@@ -10,6 +13,7 @@ export class CreateUserDto {
   })
   readonly name: string;
 
+  @ApiProperty()
   @IsInt()
   @Min(0)
   @Max(30)

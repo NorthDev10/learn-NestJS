@@ -1,9 +1,12 @@
 import {MinLength, MaxLength, IsInt, IsNumber, Min, Max } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCatDto {
   @IsInt()
+  @ApiProperty()
   readonly userId: number;
   
+  @ApiProperty()
   @MinLength(2, {
     message: "Name is too short"
   })
@@ -16,11 +19,13 @@ export class CreateCatDto {
   })
   readonly name: string;
 
+  @ApiProperty()
   @IsNumber()
   @Min(0)
   @Max(30)
   readonly age: number;
 
+  @ApiProperty()
   @MaxLength(3, {
     message: "Breed is too long"
   })
